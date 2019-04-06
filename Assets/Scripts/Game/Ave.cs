@@ -51,5 +51,10 @@ public class Ave : MonoBehaviour
             GetComponent<mruv>().friccion = true;
 
         }
+        else if (collision.gameObject.tag == "Brick")
+        {
+            GetComponent<Rigidbody2D>().velocity = GetComponent<mruv>().velocidadFinal;
+            GetComponent<mruv>().velocidadFinal = Vector3.zero;
+        }
     }
 }

@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700406549}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d12c6929270cd54a9f6f6f0cb14e9de, type: 3}
   m_Name: 
@@ -1515,10 +1515,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: e0943888d2a6d6c48842fe461cdb90f7, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: e0943888d2a6d6c48842fe461cdb90f7, type: 3}
-      propertyPath: m_RootMapOrder
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e0943888d2a6d6c48842fe461cdb90f7, type: 3}
       propertyPath: m_RootOrder
@@ -3197,7 +3193,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715941286}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cdeddd23d58a0141a6ca4d615b6f58e, type: 3}
   m_Name: 

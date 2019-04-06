@@ -55,6 +55,10 @@ public class ControlJuego : MonoBehaviour
                 {
                     actual.transform.position = position;
                 }
+                else
+                {
+                    return;
+                }
                 calcularLineaFuturo();
                 if (Input.GetMouseButtonDown(0))
                 {

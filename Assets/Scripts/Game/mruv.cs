@@ -41,7 +41,6 @@ public class mruv : MonoBehaviour
                 {
                     velocidadFinal.x -= velocidadRestante;
                 }
-                Debug.Log(velocidadFinal.x);
             }
             transform.Translate(cambioPosicion);
             

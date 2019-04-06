@@ -140,6 +140,8 @@ public class GameManager : MonoBehaviour
                             slingshot.enabled = true; //enable slingshot
                             //current bird is the current in the list
                             slingshot.BirdToThrow = Birds[currentBirdIndex];
+                            cameraFollow.BirdToFollow = Birds[currentBirdIndex].transform;
+                            cameraFollow.IsFollowing = true;
                         });
     }
 
