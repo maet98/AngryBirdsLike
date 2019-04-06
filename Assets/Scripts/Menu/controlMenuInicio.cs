@@ -20,10 +20,12 @@ public class controlMenuInicio : MonoBehaviour
         switch (gameObject.name)
         {
             case "Jugar":
+                SceneManager.LoadScene("game");
                 break;
             case "Opciones":
                 break;
             case "Salir":
+                Application.Quit();
                 break;
             default:
                 break;
