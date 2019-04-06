@@ -5,30 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class controlMenuInicio : MonoBehaviour
 {
-    private void OnMouseEnter()
+   public void CargarNivel(string nombreNivel)
     {
-        transform.localScale *= 1.1f;
+        SceneManager.LoadScene(nombreNivel);
     }
 
-    private void OnMouseExit()
+    public void SalirJuego()
     {
-        transform.localScale /= 1.1f;
-    }
-
-    private void OnMouseDown()
-    {
-        switch (gameObject.name)
-        {
-            case "Jugar":
-                SceneManager.LoadScene("game");
-                break;
-            case "Opciones":
-                break;
-            case "Salir":
-                Application.Quit();
-                break;
-            default:
-                break;
-        }
+        Application.Quit();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,35 +7,24 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource enter;
     public AudioSource exit;
-    public AudioSource click;
+    public AudioClip click;
     public AudioSource musica;
 
-    private void Start()
+    void Start()
     {
+        musica = GetComponent<AudioSource>();
+           
        
-            musica.Stop();
-       
     }
 
-    public void playEnter()
+    void Update()
     {
-
-            enter.Play();
-        
-        
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            musica.clip = click;
+            musica.Play();
+        }
     }
 
-    public void playExit()
-    {
-       
-            exit.Play();
-
-    }
-
-    public void playClick()
-    {
-      
-            click.Play();
-
-    }
+  
 }
