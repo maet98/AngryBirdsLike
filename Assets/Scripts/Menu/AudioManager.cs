@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioSource enter;
-    public AudioSource exit;
-    public AudioClip click;
-    public AudioSource musica;
+    public AudioClip clickSound;
+    AudioSource fuenteAudio; 
+
 
     void Start()
     {
-        musica = GetComponent<AudioSource>();
+        fuenteAudio = GetComponent<AudioSource>();
            
        
     }
@@ -21,8 +20,8 @@ public class AudioManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            musica.clip = click;
-            musica.Play();
+            fuenteAudio.clip = clickSound;
+            fuenteAudio.Play();
         }
     }
 
