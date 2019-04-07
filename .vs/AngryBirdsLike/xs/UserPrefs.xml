@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{F8AC34B6-52DB-E9CC-BCF6-756E7BAFB0AB}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Menu/AudioManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/nivel3.xml">
     <Files>
-      <File FileName="Assets/Scripts/Menu/controlMenuInicio.cs" Line="28" Column="36" />
-      <File FileName="Assets/Scripts/Menu/AudioManager.cs" Line="14" Column="29" />
+      <File FileName="Assets/Resources/Nivel1.xml" Line="1" Column="1" />
+      <File FileName="Assets/Resources/Nivel2.xml" Line="1" Column="1" />
+      <File FileName="Assets/Resources/nivel3.xml" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
