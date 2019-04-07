@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 21200000}
   - component: {fileID: 9600000}
-  - component: {fileID: 3795323795385519345}
+  - component: {fileID: 8846271910180909956}
   - component: {fileID: 5089964566894733719}
-  - component: {fileID: 979697445902694184}
   - component: {fileID: 1136670498}
   - component: {fileID: 485741908858595431}
   - component: {fileID: 680545975363038626}
@@ -191,7 +190,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &3795323795385519345
+--- !u!114 &8846271910180909956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,13 +199,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69e69eb578d1c4240b9dc736a89d452b, type: 3}
+  m_Script: {fileID: 11500000, guid: fe04427746456644bad65b6243e88ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
-  mass: 0
-  trail: {fileID: 0}
-  line: {fileID: 0}
 --- !u!114 &5089964566894733719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,18 +220,6 @@ MonoBehaviour:
   friccion: 0
   coeficiente: 0
   coeficienteEstatico: 0
---- !u!114 &979697445902694184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82a4353018af4954da5e6437b7946ec4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!120 &1136670498
 LineRenderer:
   m_ObjectHideFlags: 0

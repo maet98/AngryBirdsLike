@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Level number="1">
+  <Map>
+    <!--
+        D:Derecha
+        I:Izquierda
+        H:Horizontal
+        E:Enemigo
+        -->
+    <Row><![CDATA[AAAAAAAAAAAAAAAA]]></Row>
+    <Row><![CDATA[AAAAAAAAAAAAAAAA]]></Row>
+    <Row><![CDATA[AAAAAAAAAAAAAAAA]]></Row>
+    <Row><![CDATA[AAAAAAAAAAAAAAAA]]></Row>
+    <Row><![CDATA[AAAAAAAAAAAAAAAA]]></Row>
+    <Row><![CDATA[AAAAAAAAAAAAAAAA]]></Row>
+    <Row><![CDATA[AAAAAAAAAAAAAAAA]]></Row>
+    <Row><![CDATA[AAAAAHAAAAAAAAAA]]></Row>
+    <Row><![CDATA[AAAADEIAAAAAAAAA]]></Row>
+    <Row><![CDATA[AAAAHAHAAAAAAAAA]]></Row>
+    <Row><![CDATA[AAADEIDEIAAAAAAA]]></Row>
+  </Map>
+</Level>

@@ -18,10 +18,10 @@ public class SlingShot : MonoBehaviour
     //two line renderers to simulate the "strings" of the slingshot
     public LineRenderer SlingshotLineRenderer1;
     public LineRenderer SlingshotLineRenderer2;
-    
+
     //this linerenderer will draw the projected trajectory of the thrown bird
     public LineRenderer TrajectoryLineRenderer;
-    
+
     [HideInInspector]
     //the bird to throw
     public GameObject BirdToThrow;
@@ -117,11 +117,11 @@ public class SlingShot : MonoBehaviour
                         BirdToThrow.transform.positionTo(distance / 10, //duration
                             BirdWaitPosition.transform.position). //final position
                             setOnCompleteHandler((x) =>
-                        {
-                            x.complete();
-                            x.destroy();
-                            InitializeBird();
-                        });
+                            {
+                                x.complete();
+                                x.destroy();
+                                InitializeBird();
+                            });
 
                     }
                 }
@@ -138,13 +138,15 @@ public class SlingShot : MonoBehaviour
     {
         //get velocity
         Vector3 velocity = SlingshotMiddleVector - BirdToThrow.transform.position;
-        BirdToThrow.GetComponent<mruv>().activado = true;
-        BirdToThrow.GetComponent<mruv>().friccion = false; //make the bird aware of it
+        BirdToThrow.GetComponent<Bird>().OnThrow(); //make the bird aware of it
         //old and alternative way
         //BirdToThrow.GetComponent<Rigidbody2D>().AddForce
         //    (new Vector2(v2.x, v2.y) * ThrowSpeed * distance * 300 * Time.deltaTime);
         //set the velocity
-        BirdToThrow.GetComponent<mruv>().velocidadFinal = velocity*ThrowSpeed*distance;
+        //BirdToThrow.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x, velocity.y) * ThrowSpeed * distance;
+        BirdToThrow.GetComponent<mruv>().activado = true;
+        BirdToThrow.GetComponent<mruv>().velocidadFinal = new Vector3(velocity.x, velocity.y) * ThrowSpeed * distance;
+        BirdToThrow.GetComponent<Rigidbody2D>().gravityScale = 0;
 
 
         //notify interested parties that the bird was thrown
@@ -214,11 +216,5 @@ public class SlingShot : MonoBehaviour
         for (int i = 0; i < segmentCount; i++)
             TrajectoryLineRenderer.SetPosition(i, segments[i]);
     }
-
-
-
-    ///http://opengameart.org/content/forest-themed-sprites
-    ///forest sprites found on opengameart.com
-    ///© 2012-2013 Julien Jorge <julien.jorge@stuff-o-matic.com>
 
 }

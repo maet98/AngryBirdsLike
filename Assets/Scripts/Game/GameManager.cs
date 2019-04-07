@@ -100,26 +100,26 @@ public class GameManager : MonoBehaviour
             (duration,
             cameraFollow.StartingPosition). //end position
             setOnCompleteHandler((x) =>
-                        {
-                            cameraFollow.IsFollowing = false;
-                            if (AllPigsDestroyed())
-                            {
-                                CurrentGameState = GameState.Won;
-                            }
-                            //animate the next bird, if available
-                            else if (currentBirdIndex == Birds.Count - 1)
-                            {
-                                //no more birds, go to finished
-                                CurrentGameState = GameState.Lost;
-                            }
-                            else
-                            {
-                                slingshot.slingshotState = SlingshotState.Idle;
-                                //bird to throw is the next on the list
-                                currentBirdIndex++;
-                                AnimateBirdToSlingshot();
-                            }
-                        });
+            {
+                cameraFollow.IsFollowing = false;
+                if (AllPigsDestroyed())
+                {
+                    CurrentGameState = GameState.Won;
+                }
+                //animate the next bird, if available
+                else if (currentBirdIndex == Birds.Count - 1)
+                {
+                    //no more birds, go to finished
+                    CurrentGameState = GameState.Lost;
+                }
+                else
+                {
+                    slingshot.slingshotState = SlingshotState.Idle;
+                    //bird to throw is the next on the list
+                    currentBirdIndex++;
+                    AnimateBirdToSlingshot();
+                }
+            });
     }
 
     /// <summary>
@@ -133,16 +133,14 @@ public class GameManager : MonoBehaviour
             slingshot.BirdWaitPosition.transform.position) / 10, //duration
             slingshot.BirdWaitPosition.transform.position). //final position
                 setOnCompleteHandler((x) =>
-                        {
-                            x.complete();
-                            x.destroy(); //destroy the animation
-                            CurrentGameState = GameState.Playing;
-                            slingshot.enabled = true; //enable slingshot
-                            //current bird is the current in the list
-                            slingshot.BirdToThrow = Birds[currentBirdIndex];
-                            cameraFollow.BirdToFollow = Birds[currentBirdIndex].transform;
-                            cameraFollow.IsFollowing = true;
-                        });
+                {
+                    x.complete();
+                    x.destroy(); //destroy the animation
+                    CurrentGameState = GameState.Playing;
+                    slingshot.enabled = true; //enable slingshot
+                                              //current bird is the current in the list
+                    slingshot.BirdToThrow = Birds[currentBirdIndex];
+                });
     }
 
     /// <summary>
@@ -164,7 +162,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var item in Bricks.Union(Birds).Union(Pigs))
         {
-            if (item != null && item.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > Constants.MinVelocity)
+            if (item != null && ((item.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > Constants.MinVelocity) || (item.tag == "Bird" && item.GetComponent<mruv>().velocidadFinal.magnitude > Constants.MinVelocity)))
             {
                 return false;
             }

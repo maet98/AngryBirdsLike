@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts;
 
 public class Ave : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class Ave : MonoBehaviour
     bool dentro;
     public TrailRenderer trail;
     public LineRenderer line;
+    AudioManagerGame audio;
 
     private void Awake()
     {
+        audio = GameObject.Find("AudioManager").GetComponent<AudioManagerGame>();
         trail = GetComponent<TrailRenderer>();
         line = GetComponent<LineRenderer>();
     }
@@ -25,11 +28,12 @@ public class Ave : MonoBehaviour
     }
     
 
-    void Update()
+    void fixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0) && dentro)
+        if(State == BirdState.Thrown && GetComponent<Rigidbody2D>().velocity.sqrMagnitude <= Constants.MinVelocity)
         {
-            GameObject.Find("ScriptsGlobales").GetComponent<ControlJuego>().setActual(gameObject);
+            print("Destruir");
+            StartCoroutine(DestroyAfter(2));
         }
     }
 
@@ -41,10 +45,19 @@ public class Ave : MonoBehaviour
     {
         dentro = false;
     }
+    public void OnThrow()
+    {
+        //play the sound
+        audio.playTiro();
+        //show the trail renderer
+        GetComponent<TrailRenderer>().enabled = true;
+        //make the collider normal size
+        GetComponent<CircleCollider2D>().radius = Constants.BirdColliderRadiusNormal;
+        State = BirdState.Thrown;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print(collision.gameObject.name);
         if (collision.gameObject.tag == "Floor")
         {
             isGrounded = true;
@@ -54,7 +67,20 @@ public class Ave : MonoBehaviour
         else if (collision.gameObject.tag == "Brick")
         {
             GetComponent<Rigidbody2D>().velocity = GetComponent<mruv>().velocidadFinal;
+            GetComponent<Rigidbody2D>().gravityScale = 1;
             GetComponent<mruv>().velocidadFinal = Vector3.zero;
         }
+    }
+
+    IEnumerator DestroyAfter(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Destroy(gameObject);
+    }
+
+    public BirdState State
+    {
+        get;
+        private set;
     }
 }

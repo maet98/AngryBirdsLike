@@ -6,6 +6,7 @@ using Assets.Scripts;
 public class Bird : MonoBehaviour
 {
     AudioManagerGame audio;
+    bool cambio = false;
 
     private void Awake()
     {
@@ -24,6 +25,14 @@ public class Bird : MonoBehaviour
         State = BirdState.BeforeThrown;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            GetComponent<mruv>().friccion = true;
+
+        }
+    }
 
 
     void FixedUpdate()
@@ -35,6 +44,14 @@ public class Bird : MonoBehaviour
         {
             //destroy the bird after 2 seconds
             StartCoroutine(DestroyAfter(2));
+        }
+        if (transform.position.x > 12f && GetComponent<mruv>().activado)
+        {
+            Vector3 velocity = GetComponent<mruv>().velocidadFinal;
+            GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x, velocity.y);
+
+            GetComponent<Rigidbody2D>().gravityScale = 1;
+            GetComponent<mruv>().activado = false;
         }
     }
 
@@ -50,6 +67,8 @@ public class Bird : MonoBehaviour
         GetComponent<CircleCollider2D>().radius = Constants.BirdColliderRadiusNormal;
         State = BirdState.Thrown;
     }
+
+
 
     IEnumerator DestroyAfter(float seconds)
     {
