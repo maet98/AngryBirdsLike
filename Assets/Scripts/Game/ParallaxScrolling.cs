@@ -11,9 +11,7 @@ public class ParallaxScrolling : MonoBehaviour {
 
     Camera camera;
 	
-	/// <summary>
-	/// similar tactics just like the "CameraMove" script
-	/// </summary>
+
 	void Update () {
         Vector3 delta = camera.transform.position - previousCameraTransform;
         delta.y = 0; delta.z = 0;
@@ -27,6 +25,4 @@ public class ParallaxScrolling : MonoBehaviour {
 
     Vector3 previousCameraTransform;
 
-    ///background graphics found here:
-    ///http://opengameart.org/content/hd-multi-layer-parallex-background-samples-of-glitch-game-assets
 }

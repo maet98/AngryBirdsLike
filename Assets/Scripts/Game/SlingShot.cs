@@ -181,12 +181,6 @@ public class SlingShot : MonoBehaviour
         TrajectoryLineRenderer.enabled = active;
     }
 
-
-    /// <summary>
-    /// Another solution (a great one) can be found here
-    /// http://wiki.unity3d.com/index.php?title=Trajectory_Simulation
-    /// </summary>
-    /// <param name="distance"></param>
     void DisplayTrajectoryLineRenderer2(float distance)
     {
         SetTrajectoryLineRenderesActive(true);

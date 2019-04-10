@@ -1,9 +1,19 @@
 ﻿<Properties StartupConfiguration="{F8AC34B6-52DB-E9CC-BCF6-756E7BAFB0AB}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/nivel3.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Game/Bird.cs">
     <Files>
-      <File FileName="Assets/Resources/Nivel1.xml" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Nivel2.xml" Line="1" Column="1" />
-      <File FileName="Assets/Resources/nivel3.xml" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/Bird.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/Ave.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/AudioManagerGame.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/Brick.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/CameraPinchToZoom.cs" Line="4" Column="1" />
+      <File FileName="Assets/Scripts/Game/Constants.cs" Line="12" Column="8" />
+      <File FileName="Assets/Scripts/Game/ControlJuego.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/Destroyer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/Enums.cs" Line="25" Column="1" />
+      <File FileName="Assets/Scripts/Game/MapManager.cs" Line="27" Column="25" />
+      <File FileName="Assets/Scripts/Game/MoverCamera.cs" Line="25" Column="24" />
+      <File FileName="Assets/Scripts/Game/SlingShot.cs" Line="183" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
