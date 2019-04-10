@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class ParallaxScrolling : MonoBehaviour {
-
-	// Use this for initialization
+    
 	void Start () {
         camera = Camera.main;
         previousCameraTransform = camera.transform.position;
@@ -12,7 +11,7 @@ public class ParallaxScrolling : MonoBehaviour {
     Camera camera;
 	
 	/// <summary>
-	/// similar tactics just like the "CameraMove" script
+	/// La misma mecanica de  "CameraMove" script
 	/// </summary>
 	void Update () {
         Vector3 delta = camera.transform.position - previousCameraTransform;

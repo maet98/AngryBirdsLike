@@ -14,9 +14,13 @@ public class mruv : MonoBehaviour
 
     void Start()
     {
-        friccion = false;
-        coeficienteEstatico = 0.4f;
-        coeficiente = 0.9f;
+        if(name != "ObjetoMoviendose")
+        {
+            friccion = false;
+            coeficienteEstatico = 0.4f;
+            coeficiente = 0.9f;
+        }
+        
     }
 
 

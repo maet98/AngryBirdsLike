@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public SlingShot slingshot;
     [HideInInspector]
     public static GameState CurrentGameState = GameState.Start;
+    [HideInInspector]
+    public static int level;
+    public static int marcador;
     private List<GameObject> Bricks;
     private List<GameObject> Birds;
     private List<GameObject> Pigs;
@@ -60,15 +63,13 @@ public class GameManager : MonoBehaviour
                     CurrentGameState = GameState.BirdMovingToSlingshot;
                 }
                 break;
-            //if we have won or lost, we will restart the level
             //in a normal game, we would show the "Won" screen 
             //and on tap the user would go to the next level
             case GameState.Won:
+                SceneManager.LoadScene("Feedback");
+                break;
             case GameState.Lost:
-                if (Input.GetMouseButtonUp(0))
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                }
+                SceneManager.LoadScene("Feedback");
                 break;
             default:
                 break;
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
                 cameraFollow.IsFollowing = false;
                 if (AllPigsDestroyed())
                 {
+                    marcador += 1000 * Birds.Count;
                     CurrentGameState = GameState.Won;
                 }
                 //animate the next bird, if available
@@ -203,6 +205,19 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void destruido(string type)
+    {
+        if (type == "Brick")
+        {
+            marcador += 100;
+        }
+        else
+        {
+            marcador += 400;
+        }
+        
     }
 
 

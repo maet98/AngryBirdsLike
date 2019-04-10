@@ -6,6 +6,7 @@
         I:Izquierda
         H:Horizontal
         E:Enemigo
+        A:Nada
         -->
     <Row><![CDATA[AAAAAAAAAAAAAAAA]]></Row>
     <Row><![CDATA[AAAAAAAAAAAAAAAA]]></Row>
