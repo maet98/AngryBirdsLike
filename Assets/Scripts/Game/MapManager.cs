@@ -9,6 +9,7 @@ public class MapManager : MonoBehaviour
     Dictionary<char, GameObject> celdasPrefabs;
     XmlDocument level1;
 
+
     void Start()
     {
         celdasPrefabs = new Dictionary<char, GameObject>
@@ -19,7 +20,7 @@ public class MapManager : MonoBehaviour
             { 'H',Horizontal }
         };
         level1 = new XmlDocument();
-        level1.LoadXml(Resources.Load<TextAsset>("Nivel3").text);
+        level1.LoadXml(Resources.Load<TextAsset>("Nivel"+GameManager.level).text);
         LoadMap();
     }
     private void LoadMap()

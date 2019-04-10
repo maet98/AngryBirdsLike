@@ -24,10 +24,11 @@ public class Pig : MonoBehaviour
     {
         if (col.gameObject.GetComponent<Rigidbody2D>() == null) return;
 
-        //if we are hit by a bird
+        //si fue golpeada por una ave
         if (col.gameObject.tag == "Bird")
         {
             audio.PlayEnemigoDamage();
+            GameObject.Find("GameManager").GetComponent<GameManager>().destruido(tag);
             Destroy(gameObject);
         }
         else //we're hit by something else
@@ -35,7 +36,7 @@ public class Pig : MonoBehaviour
             //calculate the damage via the hit object velocity
             float damage = col.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude * 10;
             Health -= damage;
-            //don't play sound for small damage
+            //No sonar por un poco de daño
             if (damage >= 10)
                 audio.PlayEnemigoDamage();
 
@@ -44,7 +45,11 @@ public class Pig : MonoBehaviour
                 //change the shown sprite
                 GetComponent<SpriteRenderer>().sprite = SpriteShownWhenHurt;
             }
-            if (Health <= 0) Destroy(this.gameObject);
+            if (Health <= 0)
+            {
+                GameObject.Find("GameManager").GetComponent<GameManager>().destruido(tag);
+                Destroy(this.gameObject);
+            }
         }
     }
 
