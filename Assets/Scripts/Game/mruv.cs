@@ -26,7 +26,7 @@ public class mruv : MonoBehaviour
 
     void Update()
     {
-        if (activado)
+        if (activado && velocidadFinal.magnitude > 0.1f)
         {
             cambioPosicion = (velocidadFinal * Time.deltaTime) + (Physics.gravity * Time.deltaTime*Time.deltaTime/2);
             if (friccion == false)
@@ -47,9 +47,13 @@ public class mruv : MonoBehaviour
                 }
             }
             transform.Translate(cambioPosicion);
-            
         }
     }
 
-    
+    public void CambiarVelocidad(float angulo)
+    {
+        velocidadFinal = new Vector3(velocidadFinal.magnitude * Mathf.Cos(angulo), velocidadFinal.magnitude * Mathf.Sin(angulo));
+    }
+
+
 }

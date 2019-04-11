@@ -19,4 +19,9 @@
     <Row><![CDATA[AAAAHAHAAAAAAAAA]]></Row>
     <Row><![CDATA[AAADEIDEIAAAAAAA]]></Row>
   </Map>
+  <Characters>
+    <Character id ="0" PrefabName="RedBird" Posx="-6" Posy="-3.4"/>
+    <Character id ="1" PrefabName="RedBird" Posx="-7" Posy="-3.4"/>
+    <Character id ="2" PrefabName="RedBird" Posx="-8" Posy="-3.4"/>
+  </Characters>
 </Level>

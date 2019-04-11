@@ -43,11 +43,11 @@ public class FeedBack : MonoBehaviour
 
     int calcularEstrellas()
     {
-        if(GameManager.marcador > 2000)
+        if(GameManager.marcador > 3000)
         {
             return 3;
         }
-        else if (GameManager.marcador > 1000)
+        else if (GameManager.marcador > 2000)
         {
             return 2;
         }

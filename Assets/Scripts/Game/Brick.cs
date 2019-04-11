@@ -14,14 +14,14 @@ public class Brick : MonoBehaviour
         if (col.gameObject.GetComponent<Rigidbody2D>() == null) return;
 
         float damage = col.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude * 10;
-        //don't play audio for small damages
+        //no sonar la madera si el daño fue minimo
         if (damage >= 10)
         {
             audio.playMadera();
         }
-        //decrease health according to magnitude of the object that hit us
+        //Restarle la vida segun la magnitud de la velocidad que venia
         Health -= damage;
-        //if health is 0, destroy the block
+        //si la vida es menor que 0 se destruye
         if (Health <= 0)
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().destruido(tag);
@@ -30,8 +30,4 @@ public class Brick : MonoBehaviour
     }
 
     public float Health = 70f;
-
-
-    //wood sound found in 
-    //https://www.freesound.org/people/Srehpog/sounds/31623/
 }

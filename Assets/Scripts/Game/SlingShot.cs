@@ -113,7 +113,7 @@ public class SlingShot : MonoBehaviour
                     else//not pulled long enough, so reinitiate it
                     {
                         //distance/10 was found with trial and error :)
-                        //animate the bird to the wait position
+                        //animate the bird to the wait position  
                         BirdToThrow.transform.positionTo(distance / 10, //duration
                             BirdWaitPosition.transform.position). //final position
                             setOnCompleteHandler((x) =>
@@ -143,7 +143,6 @@ public class SlingShot : MonoBehaviour
         //BirdToThrow.GetComponent<Rigidbody2D>().AddForce
         //    (new Vector2(v2.x, v2.y) * ThrowSpeed * distance * 300 * Time.deltaTime);
         //set the velocity
-        //BirdToThrow.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x, velocity.y) * ThrowSpeed * distance;
         BirdToThrow.GetComponent<mruv>().activado = true;
         BirdToThrow.GetComponent<mruv>().velocidadFinal = new Vector3(velocity.x, velocity.y) * ThrowSpeed * distance;
         BirdToThrow.GetComponent<Rigidbody2D>().gravityScale = 0;

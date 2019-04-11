@@ -7,6 +7,7 @@ public class Bird : MonoBehaviour
 {
     AudioManagerGame audio;
     bool cambio = false;
+    float minDistance = 3f;
 
     private void Awake()
     {
@@ -15,18 +16,19 @@ public class Bird : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //trailrenderer is not visible until we throw the bird
+        
+        //trailRenderer no es visible si no se ha tirado
         GetComponent<TrailRenderer>().enabled = false;
         GetComponent<TrailRenderer>().sortingLayerName = "Foreground";
-        //no gravity at first
+        //no gravedad al comienzo
         GetComponent<Rigidbody2D>().isKinematic = true;
-        //make the collider bigger to allow for easy touching
-        GetComponent<CircleCollider2D>().radius = Constants.BirdColliderRadiusBig;
+        GetComponent<mruv>().activado = false;
         State = BirdState.BeforeThrown;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Activar el rozamiento cuando collisione con el suelo
         if (collision.gameObject.tag == "Floor")
         {
             GetComponent<mruv>().friccion = true;
@@ -37,19 +39,57 @@ public class Bird : MonoBehaviour
 
     void FixedUpdate()
     {
-        //if we've thrown the bird
-        //and its speed is very small
+        if (name == "GreenBird" && State == BirdState.Thrown)
+        {
+            var mruv = GetComponent<mruv>();
+            var mcu = GetComponent<MCU>();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                var hook = GameObject.FindGameObjectWithTag("Hook");
+                float distance = Vector3.Distance(transform.position, hook.transform.position);
+                if(distance <= minDistance)
+                {
+                    print(GetComponent<mruv>().velocidadFinal);
+                    print(GetComponent<Rigidbody2D>().velocity);
+                    GetComponent<MCU>().EstablecerCentro(hook.transform.position, Time.time, GetComponent<mruv>().velocidadFinal);
+                    GetComponent<MCU>().activado = true;
+                    GetComponent<mruv>().activado = false;
+                }
+                
+            }
+            else if (Input.GetButtonUp("Fire1") && GetComponent<MCU>().activado)
+            {
+                mcu.ultimaVez = Time.realtimeSinceStartup;
+                mruv.cambioPosicion = Vector3.zero;
+                mruv.velocidadFinal = mcu.velocidadFinal;
+                float angulo = mcu.angulo;
+                angulo += (Mathf.PI / 2) * (angulo < 0 ? -1 : 1);
+                mruv.CambiarVelocidad(angulo);
+                mcu.activado = false;
+                mruv.activado = true;
+            }
+        }
+
+        //Si fue lanzado con un velocidad muy pequeña
+        //se destruye
+        if(State == BirdState.BeforeThrown)
+        {
+            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            pos.z = transform.position.z;
+            if (Input.GetMouseButton(0) && Vector3.Distance(transform.position,pos) < 0.5f)
+            {
+                GameObject.Find("GameManager").GetComponent<GameManager>().startAgain(gameObject);
+            }
+        }
         if (State == BirdState.Thrown &&
             GetComponent<Rigidbody2D>().velocity.sqrMagnitude <= Constants.MinVelocity)
         {
-            //destroy the bird after 2 seconds
-            StartCoroutine(DestroyAfter(2));
+            Destroy(gameObject, 2);
         }
         if (transform.position.x > 12f && GetComponent<mruv>().activado)
         {
             Vector3 velocity = GetComponent<mruv>().velocidadFinal;
             GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x, velocity.y);
-
             GetComponent<Rigidbody2D>().gravityScale = 1;
             GetComponent<mruv>().activado = false;
         }
@@ -57,23 +97,15 @@ public class Bird : MonoBehaviour
 
     public void OnThrow()
     {
-        //play the sound
+        //sonar el Tiro
         audio.playTiro();
-        //show the trail renderer
+        //activar el trailRenderer
         GetComponent<TrailRenderer>().enabled = true;
         //allow for gravity forces
         GetComponent<Rigidbody2D>().isKinematic = false;
-        //make the collider normal size
+        //Establecer el collider a un radio normal
         GetComponent<CircleCollider2D>().radius = Constants.BirdColliderRadiusNormal;
         State = BirdState.Thrown;
-    }
-
-
-
-    IEnumerator DestroyAfter(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        Destroy(gameObject);
     }
 
     public BirdState State

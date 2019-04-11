@@ -9,6 +9,7 @@ TagManager:
   - Pig
   - Floor
   - DeadZone
+  - Hook
   layers:
   - Default
   - TransparentFX

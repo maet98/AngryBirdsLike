@@ -9,15 +9,16 @@ using UnityEngine;
 namespace Assets.Scripts
 {
     [DataContract]
-    public class Character : MonoBehaviour
+    public class Character
     {
         [DataMember]
         public string PrefabName { get; set; }
         [DataMember]
         public Vector3  posicion  { get; set; }
         [DataMember]
-        public Vector3 rotation { get; set; }
-
+        public Quaternion rotation { get; set; }
+        [DataMember]
+        public bool seleccionada;
 
     }
 }

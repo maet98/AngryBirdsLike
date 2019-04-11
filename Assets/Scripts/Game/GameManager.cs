@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static GameState CurrentGameState = GameState.Start;
     [HideInInspector]
     public static int level;
+    public GameObject BirdToFly;
     public static int marcador;
     private List<GameObject> Bricks;
     private List<GameObject> Birds;
@@ -40,12 +41,6 @@ public class GameManager : MonoBehaviour
         switch (CurrentGameState)
         {
             case GameState.Start:
-                //if player taps, begin animating the bird 
-                //to the slingshot
-                if (Input.GetMouseButtonUp(0))
-                {
-                    AnimateBirdToSlingshot();
-                }
                 break;
             case GameState.BirdMovingToSlingshot:
                 //do nothing
@@ -117,9 +112,6 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     slingshot.slingshotState = SlingshotState.Idle;
-                    //bird to throw is the next on the list
-                    currentBirdIndex++;
-                    AnimateBirdToSlingshot();
                 }
             });
     }
@@ -130,7 +122,7 @@ public class GameManager : MonoBehaviour
     void AnimateBirdToSlingshot()
     {
         CurrentGameState = GameState.BirdMovingToSlingshot;
-        Birds[currentBirdIndex].transform.positionTo
+        BirdToFly.transform.positionTo
             (Vector2.Distance(Birds[currentBirdIndex].transform.position / 10,
             slingshot.BirdWaitPosition.transform.position) / 10, //duration
             slingshot.BirdWaitPosition.transform.position). //final position
@@ -140,8 +132,7 @@ public class GameManager : MonoBehaviour
                     x.destroy(); //destroy the animation
                     CurrentGameState = GameState.Playing;
                     slingshot.enabled = true; //enable slingshot
-                                              //current bird is the current in the list
-                    slingshot.BirdToThrow = Birds[currentBirdIndex];
+                    slingshot.BirdToThrow = BirdToFly;
                 });
     }
 
@@ -152,7 +143,7 @@ public class GameManager : MonoBehaviour
     /// <param name="e"></param>
     private void Slingshot_BirdThrown(object sender, System.EventArgs e)
     {
-        cameraFollow.BirdToFollow = Birds[currentBirdIndex].transform;
+        cameraFollow.BirdToFollow = BirdToFly.transform;
         cameraFollow.IsFollowing = true;
     }
 
@@ -164,13 +155,22 @@ public class GameManager : MonoBehaviour
     {
         foreach (var item in Bricks.Union(Birds).Union(Pigs))
         {
-            if (item != null && ((item.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > Constants.MinVelocity) || (item.tag == "Bird" && item.GetComponent<mruv>().velocidadFinal.magnitude > Constants.MinVelocity)))
+            if (item != null && ((item.GetComponent<Rigidbody2D>().velocity.sqrMagnitude > Constants.MinVelocity) ||
+                (item.tag == "Bird" && item.GetComponent<mruv>().velocidadFinal.magnitude > Constants.MinVelocity) ||
+                (item.name == "GreenBird" && item.GetComponent<MCU>().velocidadFinal.sqrMagnitude > Constants.MinVelocity)))
             {
                 return false;
             }
         }
 
         return true;
+    }
+
+    public void startAgain(GameObject ave)
+    {
+        BirdToFly = ave;
+        CurrentGameState = GameState.BirdMovingToSlingshot;
+        AnimateBirdToSlingshot();
     }
 
     /// <summary>
@@ -218,6 +218,25 @@ public class GameManager : MonoBehaviour
             marcador += 400;
         }
         
+    }
+
+    public void reload()
+    {
+        Bricks = new List<GameObject>(GameObject.FindGameObjectsWithTag("Brick"));
+        Birds = new List<GameObject>(GameObject.FindGameObjectsWithTag("Bird"));
+        Pigs = new List<GameObject>(GameObject.FindGameObjectsWithTag("Pig"));
+    }
+
+    public void destroyAll()
+    {
+        foreach(var item in Bricks.Union(Pigs).Union(Birds))
+        {
+            Destroy(item);
+        }
+        Bricks.Clear();
+        Birds.Clear();
+        Pigs.Clear();
+        currentBirdIndex = 0;
     }
 
 

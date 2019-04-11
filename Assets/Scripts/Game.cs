@@ -10,10 +10,17 @@ namespace Assets.Scripts
     public class Game
     {
         [DataMember]
-        List<Character> Birds;
+        public List<Character> Birds;
         [DataMember]
-        List<Character> Bricks;
+        public List<Character> Bricks;
         [DataMember]
-        List<Character> Pigs;
+        public List<Character> Pigs;
+
+        public Game()
+        {
+            Birds = new List<Character>();
+            Bricks = new List<Character>();
+            Pigs = new List<Character>();
+        }
     }
 }
