@@ -32,7 +32,6 @@ public class Bird : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             GetComponent<mruv>().friccion = true;
-
         }
     }
 
@@ -49,8 +48,6 @@ public class Bird : MonoBehaviour
                 float distance = Vector3.Distance(transform.position, hook.transform.position);
                 if(distance <= minDistance)
                 {
-                    print(GetComponent<mruv>().velocidadFinal);
-                    print(GetComponent<Rigidbody2D>().velocity);
                     GetComponent<MCU>().EstablecerCentro(hook.transform.position, Time.time, GetComponent<mruv>().velocidadFinal);
                     GetComponent<MCU>().activado = true;
                     GetComponent<mruv>().activado = false;
@@ -72,19 +69,18 @@ public class Bird : MonoBehaviour
 
         //Si fue lanzado con un velocidad muy pequeña
         //se destruye
-        if(State == BirdState.BeforeThrown)
-        {
-            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            pos.z = transform.position.z;
-            if (Input.GetMouseButton(0) && Vector3.Distance(transform.position,pos) < 0.5f)
-            {
-                GameObject.Find("GameManager").GetComponent<GameManager>().startAgain(gameObject);
-            }
-        }
         if (State == BirdState.Thrown &&
-            GetComponent<Rigidbody2D>().velocity.sqrMagnitude <= Constants.MinVelocity)
+            GetComponent<mruv>().velocidadFinal.sqrMagnitude <= Constants.MinVelocity)
         {
-            Destroy(gameObject, 2);
+            if(name == "GreenBird" && !GetComponent<MCU>().activado)
+            {
+                Destroy(gameObject, 2);
+            }
+            else if (name == "RedBird")
+            {
+                Destroy(gameObject, 2);
+            }
+            
         }
         if (transform.position.x > 12f && GetComponent<mruv>().activado)
         {

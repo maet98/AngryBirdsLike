@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
         switch (CurrentGameState)
         {
             case GameState.Start:
+                if (Input.GetMouseButtonUp(0))
+                {
+                    AnimateBirdToSlingshot();
+                }
                 break;
             case GameState.BirdMovingToSlingshot:
                 //do nothing
@@ -56,6 +60,7 @@ public class GameManager : MonoBehaviour
                     slingshot.enabled = false;
                     AnimateCameraToStartPosition();
                     CurrentGameState = GameState.BirdMovingToSlingshot;
+
                 }
                 break;
             //in a normal game, we would show the "Won" screen 
@@ -111,7 +116,9 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
+                    currentBirdIndex++;
                     slingshot.slingshotState = SlingshotState.Idle;
+                    AnimateBirdToSlingshot();
                 }
             });
     }
@@ -122,7 +129,7 @@ public class GameManager : MonoBehaviour
     void AnimateBirdToSlingshot()
     {
         CurrentGameState = GameState.BirdMovingToSlingshot;
-        BirdToFly.transform.positionTo
+        Birds[currentBirdIndex].transform.positionTo
             (Vector2.Distance(Birds[currentBirdIndex].transform.position / 10,
             slingshot.BirdWaitPosition.transform.position) / 10, //duration
             slingshot.BirdWaitPosition.transform.position). //final position
@@ -132,7 +139,7 @@ public class GameManager : MonoBehaviour
                     x.destroy(); //destroy the animation
                     CurrentGameState = GameState.Playing;
                     slingshot.enabled = true; //enable slingshot
-                    slingshot.BirdToThrow = BirdToFly;
+                    slingshot.BirdToThrow = Birds[currentBirdIndex];
                 });
     }
 
@@ -143,7 +150,7 @@ public class GameManager : MonoBehaviour
     /// <param name="e"></param>
     private void Slingshot_BirdThrown(object sender, System.EventArgs e)
     {
-        cameraFollow.BirdToFollow = BirdToFly.transform;
+        cameraFollow.BirdToFollow = Birds[currentBirdIndex].transform;
         cameraFollow.IsFollowing = true;
     }
 

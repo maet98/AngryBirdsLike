@@ -6,24 +6,38 @@ using Assets.Scripts;
 using System.Runtime.Serialization;
 using System.IO;
 using UnityEngine.SceneManagement;
-
+using Assets;
 
 public class XmlManager : MonoBehaviour
 {
     public static Game currentGame;
+    public static Configuracion configuracion;
+    public static HighScore highScore;
     string rutaXML;
     string rutaconfXML;
+    string rutaHighXML;
     string filename = "lastGameState.xml";
     string fileConf = "conf.xml";
-    private void Start()
+    string fileHighScore = "highscore.xml";
+    private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
         rutaXML = getPath(filename);
         rutaconfXML = getPath(fileConf);
-        currentGame = new Game();
+        rutaHighXML = getPath(fileHighScore);
+        LoadHighScores();
         LoadConfiguraciones();
     }
-
+    private void Start()
+    {
+        var cant = GameObject.FindGameObjectsWithTag("manager");
+        if (cant.Length > 1) {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
+        
+        currentGame = new Game();
+        
+    }
 
     public void SaveState()
     {
@@ -34,14 +48,22 @@ public class XmlManager : MonoBehaviour
             dcSerializer.WriteObject(filestream, currentGame);
         }
     }
+    public void SaveHighScore()
+    {
+        DataContractSerializer dcSerializer = new DataContractSerializer(typeof(HighScore));
+
+        using (FileStream filestream = new FileStream(rutaHighXML, FileMode.Create))
+        {
+            dcSerializer.WriteObject(filestream, highScore);
+        }
+    }
 
     public void SaveConfiguraciones()
     {
         DataContractSerializer dcSerializer = new DataContractSerializer(typeof(Configuracion));
         using (FileStream filestream = new FileStream(rutaconfXML, FileMode.Create))
         {
-            Configuracion conf = GetComponent<Configuracion>();
-            dcSerializer.WriteObject(filestream, conf);
+            dcSerializer.WriteObject(filestream, configuracion);
         }
     }
 
@@ -52,11 +74,12 @@ public class XmlManager : MonoBehaviour
         {
             using (FileStream filestream = new FileStream(rutaconfXML, FileMode.Open))
             {
-                Configuracion conf = (Configuracion)dcSerializer.ReadObject(filestream);
-                GetComponent<Configuracion>().Music = conf.Music;
-                GetComponent<Configuracion>().Sonido = conf.Sonido;
-                GetComponent<Configuracion>().nombre = conf.nombre;
+                configuracion = (Configuracion)dcSerializer.ReadObject(filestream);
             }
+        }
+        else
+        {
+            configuracion = new Configuracion();
         }
         
 
@@ -75,6 +98,21 @@ public class XmlManager : MonoBehaviour
         else
         {
             currentGame = new Game();
+        }
+    }
+    public void LoadHighScores()
+    {
+        DataContractSerializer dcSerializer = new DataContractSerializer(typeof(HighScore));
+        if (File.Exists(rutaHighXML))
+        {
+            using (FileStream filestream = new FileStream(rutaHighXML, FileMode.Open))
+            {
+                highScore = (HighScore)dcSerializer.ReadObject(filestream);
+            }
+        }
+        else
+        {
+            highScore = new HighScore();
         }
 
     }

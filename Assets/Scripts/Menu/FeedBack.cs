@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts;
+using Assets;
 using TMPro;
 
 public class FeedBack : MonoBehaviour
@@ -12,8 +13,23 @@ public class FeedBack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        string nivel;
+        if(GameManager.level == 1)
+        {
+            nivel = "Facil";
+        }else if (GameManager.level == 2)
+        {
+            nivel = "Medio";
+        }
+        else
+        {
+            nivel = "Dificil";
+        }
         if (GameManager.CurrentGameState == GameState.Won)
         {
+            Score nuevo = new Score(calcularEstrellas(), XmlManager.configuracion.nombre, nivel);
+            XmlManager.highScore.scores.Add(nuevo);
+            GameObject.Find("XmlManager").GetComponent<XmlManager>().SaveHighScore();
             Titulo.text = "Ganaste";
         }
         else

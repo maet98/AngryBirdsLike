@@ -10,6 +10,7 @@ TagManager:
   - Floor
   - DeadZone
   - Hook
+  - manager
   layers:
   - Default
   - TransparentFX

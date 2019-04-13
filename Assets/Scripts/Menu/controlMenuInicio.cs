@@ -7,8 +7,8 @@ using Assets.Scripts;
 
 public class controlMenuInicio : MonoBehaviour
 {
+    AudioManager AudioManager;
     public static string viene;
-    Configuracion conf;
     public Text nombre;
     public Text placeholder;
     public Toggle sonido;
@@ -16,41 +16,55 @@ public class controlMenuInicio : MonoBehaviour
 
     private void Awake()
     {
-        conf = GameObject.Find("XmlManager").GetComponent<Configuracion>();
+        AudioManager = GetComponent<AudioManager>();
         if(SceneManager.GetActiveScene().name == "Opciones")
         {
-            sonido.isOn = conf.Sonido;
-            musica.isOn = conf.Music;
-            nombre.text = conf.nombre;
-            placeholder.text = conf.nombre;
+            sonido.isOn = XmlManager.configuracion.Sonido;
+            musica.isOn = XmlManager.configuracion.Music;
+            nombre.text = XmlManager.configuracion.nombre;
+            placeholder.text = XmlManager.configuracion.nombre;
         }
         
     }
     public void Jugar(int level)
     {
+        AudioManager.playClick();
         GameManager.level = level;
         CargarNivel("Game");
     }
     public void CargarNivel(string nombreNivel)
     {
+        AudioManager.playClick();
+        viene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(nombreNivel);
+    }
+    public void CargarHighScore(string nombreNivel)
+    {
+        AudioManager.playClick();
+        viene = SceneManager.GetActiveScene().name;
+        MostrarPuntuaje.nivel = nombreNivel;
+        SceneManager.LoadScene("HighScore");
     }
 
     public void Guardar()
     {
-        conf.Music = musica.isOn;
-        conf.Sonido = sonido.isOn;
-        conf.nombre = nombre.text;
+        AudioManager.playClick();
+        XmlManager.configuracion.Music = musica.isOn;
+        XmlManager.configuracion.Sonido = sonido.isOn;
+        XmlManager.configuracion.nombre = nombre.text;
+        GameObject.Find("XmlManager").GetComponent<XmlManager>().SaveConfiguraciones();
         CargarNivel(viene);
     }
 
     public void volverAtras()
     {
+        AudioManager.playClick();
         SceneManager.LoadScene(viene);
     }
 
     public void SalirJuego()
     {
+        AudioManager.playClick();
         Application.Quit();
     }
 }

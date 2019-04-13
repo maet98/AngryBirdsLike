@@ -21,10 +21,10 @@
     <Row><![CDATA[AAADEIDEIDEIAAAA]]></Row>
   </Map>
   <Characters>
-    <Character id ="0" PrefabName="GreenBird" Posx ="-6" Posy="-3.4"/>
+    <Character id ="0" PrefabName="RedBird" Posx ="-6" Posy="-3.4"/>
     <Character id ="1" PrefabName="GreenBird" Posx ="-6.7" Posy="-3.4"/>
     <Character id ="2" PrefabName="GreenBird" Posx ="-7.4" Posy="-3.4"/>
-    <Character id ="3" PrefabName="GreenBird" Posx ="-8.1" Posy="-3.4"/>
+    <Character id ="3" PrefabName="RedBird" Posx ="-8.1" Posy="-3.4"/>
     <Character id ="4" PrefabName="Hook" Posx ="6.5" Posy="2.5"/>
     
   </Characters>

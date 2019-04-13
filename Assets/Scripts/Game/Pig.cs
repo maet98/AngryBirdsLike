@@ -23,7 +23,11 @@ public class Pig : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.GetComponent<Rigidbody2D>() == null) return;
-
+        if(col.gameObject.tag == "Floor")
+        {
+            GameObject.Find("GameManager").GetComponent<GameManager>().destruido(tag);
+            Destroy(this.gameObject);
+        }
         //si fue golpeada por una ave
         if (col.gameObject.tag == "Bird")
         {

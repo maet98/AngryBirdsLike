@@ -7,24 +7,40 @@ public class AudioManagerGame : MonoBehaviour
     public AudioSource Tiro;
     public AudioSource Madera;
     public AudioSource EnemigoDamage;
+    public AudioSource musica;
 
     void Start()
     {
-        
+        if (!XmlManager.configuracion.Music)
+        {
+            musica.Stop();
+        }
     }
 
     public void playTiro()
     {
-        Tiro.Play();
+        if (XmlManager.configuracion.Sonido)
+        {
+            Tiro.Play();
+        }
+        
     }
 
     public void playMadera()
     {
-        Madera.Play();
+        if (XmlManager.configuracion.Sonido)
+        {
+            Madera.Play();
+        }
+        
     }
 
     public void PlayEnemigoDamage()
     {
-        EnemigoDamage.Play();
+        if (XmlManager.configuracion.Sonido)
+        {
+            EnemigoDamage.Play();
+        }
+        
     }
 }

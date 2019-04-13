@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Assets.Scripts
 {
     [DataContract]
-    public class Configuracion : MonoBehaviour
+    public class Configuracion 
     {
         [DataMember]
         public bool Sonido { get; set; }
@@ -17,5 +17,12 @@ namespace Assets.Scripts
         public bool Music { get; set; }
         [DataMember]
         public string nombre { get; set; }
+
+        public Configuracion()
+        {
+            Sonido = true;
+            Music = true;
+            nombre = "Miguel";
+        }
     }
 }

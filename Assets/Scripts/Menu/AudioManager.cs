@@ -2,27 +2,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioClip clickSound;
-    AudioSource fuenteAudio; 
+    public AudioSource click;
+    public AudioSource music;
 
 
     void Start()
     {
-        fuenteAudio = GetComponent<AudioSource>();
-           
+        if (!XmlManager.configuracion.Music)
+        {
+            music.Stop();
+        }
        
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+    }
+
+    public void playClick()
+    {
+        if (XmlManager.configuracion.Sonido)
         {
-            fuenteAudio.clip = clickSound;
-            fuenteAudio.Play();
+            click.Play();
         }
+
     }
 
   
